@@ -9,7 +9,7 @@ def _build_zoom_mapping(MAX_ZOOM=31):
     """
     if MAX_ZOOM is None:
         from gheat import MAX_ZOOM # won't use these in testing
-        from django.conf import settings
+        #from django.conf import settings
 
     zoom_opaque = getattr(settings, 'GHEAT_ZOOM_OPAQUE', -15)
 
