@@ -98,7 +98,7 @@ class Tile(object):
 
     img = None
 
-    def __init__(self, color_scheme, dots, zoom, x, y, fspath):
+    def __init__(self, color_scheme, dots, zoom, x, y, fspath, user):
         """x and y are tile coords per Google Maps.
         """
 
@@ -155,6 +155,7 @@ class Tile(object):
         self.fspath = fspath
         self.opacity = gheat.opacity.zoom_to_opacity[zoom]
         self.color_scheme = color_scheme
+        self.user = user
   
 
     def is_empty(self):

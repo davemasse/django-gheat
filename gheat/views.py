@@ -1,4 +1,5 @@
 import os.path
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from gheat import dots
 from gheat import backend, color_schemes, translate, ROOT, log, \
@@ -8,7 +9,7 @@ from django.http import HttpResponseBadRequest
 from django.conf import settings
 from django.views.static import serve
 
-# Create your views here.
+@login_required
 def serve_tile(request,color_scheme,zoom,x,y):
     '''
         Responsible for serving png files of the tile for the heat map
@@ -40,7 +41,7 @@ def serve_tile(request,color_scheme,zoom,x,y):
     else:
         return HttpResponseRedirect(fspath.replace(ROOT, '/site_media/gheat/'))
 
-
+@login_required
 def generate_tile(request,color_scheme,zoom,x,y):
     '''
         This view will generate the png file for the current request
@@ -55,7 +56,7 @@ def generate_tile(request,color_scheme,zoom,x,y):
         return fspath
 
     color_scheme = color_schemes[color_scheme]
-    tile = backend.Tile(color_scheme, dots, zoom, x, y, fspath)
+    tile = backend.Tile(color_scheme, dots, zoom, x, y, fspath, request.user)
     if tile.is_empty():
         fspath = color_scheme.get_empty_fspath(zoom)
         log.debug('serving empty tile, request: %s, file %s' % (path,fspath))

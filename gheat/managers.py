@@ -17,6 +17,7 @@ class PointManager(models.Manager):
             longitude__lte=lng1,
             longitude__gte=lng2,
             density__gt=0,
+            user=tile.user,
             )
         return qs
 
