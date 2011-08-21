@@ -15,6 +15,3 @@ class Point(models.Model):
         name='density of the current point')
 
     objects = managers.PointManager()
-
-    class Meta:
-        unique_together = ('uid',)
