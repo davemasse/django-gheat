@@ -16,3 +16,6 @@ class Point(models.Model):
     density = models.PositiveIntegerField(default=0, editable=False, name='density of the current point')
     
     objects = managers.PointManager()
+    
+    class Meta:
+      ordering = ('-date_added',)
